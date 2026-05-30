@@ -1,37 +1,47 @@
-import Link from "next/link";
-import Image from "next/image";
-import NavItem, { NavItemInterface } from "../NavItem";
+// Components/navbar/index.tsx
+
+"use client"
+
+import "./index.css"
+import Image from "next/image"
+import { useState } from "react"
 
 export default function Navbar() {
-    const items: NavItemInterface[] = [
-        { href: "/about",
- label: "About" },
-        { href: "/contact", label: "Contact" },
-    ];
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <header>
-        <nav className="navbar">
-            <Link href="/" className="navbar-logo">
-                <Image src="public/IconADPFN.png" 
-                alt="Logo" 
-                width={50} 
-                height={50} />
-            </Link>  
-            <ul className="nav-items">
-                {items.map((item, index) => (
-                    <NavItem 
-                    key={index}
-                    href={item.href} 
-                    label={item.label} 
-                    />
-                ))}
-            </ul>
+    <header className="header">
+      <div className="container header-content">
 
-            <button className="btn-default">
-                Contatar
-            </button>
+        <div className="logo-area">
+          <Image
+            src="/IconADPFN.png"
+            alt="Logo"
+            width={100}
+            height={100}
+          />
 
+          <div>
+            <h1>Assembleia de Deus</h1>
+            <p>Passo Fundo Norte</p>
+          </div>
+        </div>
+
+        <button
+          className="menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          ☰
+        </button>
+
+        <nav className={menuOpen ? "nav active" : "nav"}>
+          <a href="#cultos">Cultos</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#contato">Contato</a>
+          <a href="#departamentos">Departamentos</a>
         </nav>
+
+      </div>
     </header>
-  );
+  )
 }
